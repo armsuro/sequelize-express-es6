@@ -1,1 +1,1 @@
-Please wattche package.json
+Please watch package.json

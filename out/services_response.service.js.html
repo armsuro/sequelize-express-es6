@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/response.service.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: services/response.service.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import request from 'request';
+import Constants from '../config/constants';
+
+/**
+ * ResponseService class to send many types responses.
+ * @class
+ */
+
+class ResponseService {
+    /**
+     * Constructor define all status codes
+     * @constructor
+     */
+    constructor() {
+        this.MESSAGE = {
+            'success': {
+                'status': 'Success.',
+                'message': 'Successfully processed.',
+                'header_status': 200,
+            },
+            'created': {
+                'status': 'Created.',
+                'message': 'Successfully processed.',
+                'header_status': 201,
+            },
+            'no_data': {
+                'status': 'No Content.',
+                'message': 'No Data Matching For Your Request.',
+                'header_status': 200,
+            },
+            'bad_request': {
+                'status': 'Bad Request.',
+                'message': 'Bad Request.',
+                'header_status': 400,
+            },
+            'unauthorized': {
+                'status': 'Unauthorized.',
+                'message': 'Unauthorized.',
+                'header_status': 401,
+            },
+            'forbidden': {
+                'status': 'Forbidden.',
+                'message': 'Forbidden.',
+                'header_status': 403,
+            },
+            'not_found': {
+                'status': 'Not Found.',
+                'message': 'Not Found.',
+                'header_status': 404,
+            },
+            'not_allowed': {
+                'status': 'Method Not Allowed.',
+                'message': 'Method Not Allowed.',
+                'header_status': 405,
+            },
+            'unprocessable': {
+                'status': 'Unprocessable Entity.',
+                'message': 'Unprocessable Entity.',
+                'header_status': 422,
+            },
+            'login_timeout': {
+                'status': 'Login Timeout.',
+                'message': 'Login Timeout.',
+                'header_status': 401,
+            },
+            'unavailable': {
+                'status': 'Unavailable For Legal Reasons.',
+                'message': 'Unavailable For Legal Reasons.',
+                'header_status': 451,
+            },
+            'server_error': {
+                'status': 'Internal Server Error.',
+                'message': 'Internal Server Error.',
+                'header_status': 500,
+            },
+            'bad_gateway': {
+                'status': 'Bad Gateway.',
+                'message': 'Bad Gateway.',
+                'header_status': 502,
+            },
+        };
+    }
+
+
+    /**
+     * sendSlack function send error notification to slack
+     * @param {Object} data - Eroor object.
+     * @return {Object} data.
+     */
+    sendSlack(data) {
+        this.errorHendler();
+        if(!Object.keys(data).length) return;
+        request({
+            url: Constants.slack_url,
+            method: 'POST',
+            json: {
+                'text': JSON.stringify(new Error(data)),
+            },
+        });
+    }
+    /**
+     * Generate function creates and returns json for responses
+     * @param {string} key - The key of status code.
+     * @param {object} data - The data is an additional field. If you give argument to the function, it returns your data, otherwise {}.
+     * @param {string} message - The message is an additional field. If you give argument to the function, it returns your message, otherwise send custom message.
+     * @return {json} created response.
+     */
+    generate(key, data, message) {
+        const obj = this.MESSAGE[key];
+        const returnData = (data) ? data : {};
+        if (obj['header_status'] == 500) this.sendSlack(returnData);
+        return {
+            'status': obj['status'],
+            'http_status': obj['header_status'],
+            'message': (message) ? message : obj['message'],
+            'data': returnData,
+        };
+    }
+    /**
+     * errorHendler function createsjson for eceptions
+     */
+    errorHendler() {
+        if (!('toJSON' in Error.prototype))
+        Object.defineProperty(Error.prototype, 'toJSON', {
+            value: function() {
+                let alt = {};
+
+                Object.getOwnPropertyNames(this).forEach(function(key) {
+                    alt[key] = this[key];
+                }, this);
+
+                return alt;
+            },
+            configurable: true,
+            writable: true,
+        });
+    }
+}
+
+export default new ResponseService();
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Database.html">Database</a></li><li><a href="EventController.html">EventController</a></li><li><a href="Redis.html">Redis</a></li><li><a href="ResponseService.html">ResponseService</a></li><li><a href="Sport.html">Sport</a></li><li><a href="Sync.html">Sync</a></li><li><a href="Websocket.html">Websocket</a></li><li><a href="WebsocketRout.html">WebsocketRout</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Mar 21 2018 19:00:57 GMT+0400 (+04)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

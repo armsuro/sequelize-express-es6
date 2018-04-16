@@ -1,29 +1,44 @@
-"use strict";
-
 import path from 'path';
 import fs from 'fs';
 import Sequelize from 'sequelize';
+import Constants from './config/constants';
 
-const sequelize = new Sequelize('mysql://root:123456@localhost/live_video_streaming', {});
+/**
+ * Database class
+ * @class
+ * @return {json} Sequelize models
+*/
 
-var db = {};
-console.log(`${__dirname}/models`);
-fs
-    .readdirSync(`${__dirname}/models`)
-    .filter(file => {
-        return (file.indexOf(".") !== 0) && (file !== "index.js");
-    })
-    .forEach(file=> {
-        const model = sequelize.import(path.join(__dirname, "/models", file));
-        db[model.name] = model;
-    });
-
-Object.keys(db).forEach(modelName => {
-    if ("associate" in db[modelName]) {
-        db[modelName].associate(db);
+class Database {
+	/**
+     * function constructor
+     * @constructor
+     */
+    constructor() {
+        this.db = {};
+        this.sequelize = new Sequelize(Constants.mysql.uri, {});
     }
-});
 
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-module.exports = db;
+    /**
+     * Function Create find all models and created db
+     * @return {json} db
+    */
+    create() {
+        fs
+            .readdirSync(`${__dirname}/models`)
+            .forEach((file) => {
+                const model = this.sequelize.import(path.join(__dirname, '/models', file));
+                this.db[model.name] = model;
+            });
+        Object.keys(this.db).forEach((modelName) => {
+            if ('associate' in this.db[modelName]) {
+                this.db[modelName].associate(this.db);
+            }
+        });
+        this.db.sequelize = this.sequelize;
+        this.db.Sequelize = Sequelize;
+        return this.db;
+    }
+}
+
+export default new Database().create();

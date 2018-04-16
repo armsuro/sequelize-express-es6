@@ -1,28 +1,27 @@
 module.exports = (sequelize, DataTypes) => {
-    var user = sequelize.define("user", {
+    const users = sequelize.define('users', {
         first_name: DataTypes.STRING,
-		last_name: DataTypes.STRING,
-		full_name: DataTypes.STRING,
-		company_name: DataTypes.STRING,
-		image: DataTypes.STRING,
-		email: DataTypes.STRING,
-		domain: DataTypes.STRING,
-		phone: DataTypes.STRING,
-		address: DataTypes.STRING,
-		time_zone: DataTypes.STRING,
-		sport_id: DataTypes.INTEGER,
-		country_code: DataTypes.STRING,
-		active: DataTypes.BOOLEAN,
-		role_id: DataTypes.INTEGER,
-		password: DataTypes.STRING,
-		added_user_id: DataTypes.INTEGER
+        last_name: DataTypes.STRING,
+        image: DataTypes.STRING,
+        email: DataTypes.STRING,
+        phone: DataTypes.STRING,
+        address: DataTypes.STRING,
+        time_zone: DataTypes.STRING,
+        country_code: DataTypes.STRING,
+        active: DataTypes.BOOLEAN,
+        role_id: DataTypes.INTEGER,
+        added_user_id: DataTypes.INTEGER,
+        default_activity_countries: DataTypes.JSON,
+        organization_id: DataTypes.INTEGER,
+        streams_count: DataTypes.INTEGER,
     }, {
-  		timestamps: false,
+        timestamps: false,
+        paranoid: true,
         classMethods: {
-            associate: models => {
-            }
-        }
-    });
+            associate: (models) => {
 
-    return user;
+            },
+        },
+    });
+    return users;
 };

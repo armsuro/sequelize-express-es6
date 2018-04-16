@@ -1,5 +1,5 @@
 {
-  "name": "es6-express-sequelize",
+  "name": "score-board",
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
@@ -7,7 +7,8 @@
     "clean": "rm -rf build && mkdir build",
     "start": "nodemon",
     "test": "NODE_ENV=test mocha --recursive --reporter spec --compilers js:babel-register tests",
-    "lint": "eslint app"
+    "lint": "eslint app",
+    "doc": "jsdoc -r ./app"
   },
   "engines": {
     "node": ">= 6",
@@ -28,16 +29,23 @@
     "body-parser": "^1.15.2",
     "cors": "^2.8.1",
     "dotenv": "^4.0.0",
-    "express": "^4.14.0",
-    "helmet": "^3.1.0",
+    "esdoc": "^1.0.4",
+    "esdoc-standard-plugin": "^1.0.0",
+    "express": "^4.16.3",
+    "frameguard": "^3.0.0",
+    "helmet": "^3.12.0",
     "jsonwebtoken": "^7.1.0",
     "lodash": "^4.16.4",
     "method-override": "^2.3.6",
-    "mongoose": "^4.6.5",
+    "mongoose": "^4.13.12",
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
+    "mysql": "^2.15.0",
     "mysql2": "^1.5.2",
-    "sequelize": "^4.33.4"
+    "redis": "^2.8.0",
+    "sequelize": "^3.23.6",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -53,7 +61,8 @@
     "eslint-plugin-babel": "^4.0.0",
     "faker": "^3.1.0",
     "isparta": "^4.0.0",
+    "jsdoc": "^3.5.5",
     "mocha": "^3.1.2",
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.17.2"
   }
 }

@@ -1,26 +1,13 @@
-import jwt from 'jsonwebtoken';
-import Constants from '../config/constants';
-
-const { sessionSecret } = Constants.security;
-
+import DB from './database';
 export default function authenticate(req, res, next) {
-  const { authorization } = req.headers;
-  jwt.verify(authorization, sessionSecret, async (err, decoded) => {
-    if (err) {
-      return res.sendStatus(401);
-    }
-
-    // If token is decoded successfully, find user and attach to our request
-    // for use in our route or other middleware
-    try {
-      const user = await models.user.findById(decoded._id);
-      if (!user) {
-        return res.sendStatus(401);
-      }
-      req.currentUser = user;
-      next();
-    } catch(err) {
-      next(err);
-    }
-  });
+    DB.access_token.findOne({
+        where: {
+            token: req.headers['access-token'],
+        },
+    }).then((user) => {
+        req.user_id = user.id;
+        return next();
+    }).catch((err) => {
+        return next(err);
+    });
 }
