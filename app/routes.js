@@ -3,11 +3,11 @@ import {
 } from 'express';
 
 import errorHandler from './middleware/error-handler';
+import fileController from './controllers/file.controller';
 const routes = new Router();
-// Users
-routes.get('/test', (req, res) => {
-    res.json(true);
-});
+// File
+routes.post('/upload', fileController.upload);
+routes.post('/download', fileController.download);
 
 routes.use(errorHandler);
 

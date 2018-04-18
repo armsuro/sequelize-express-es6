@@ -16,7 +16,7 @@ class Database {
      */
     constructor() {
         this.db = {};
-        this.sequelize = new Sequelize(Constants.mysql.uri, {});
+        this.sequelize = new Sequelize(Constants.postgres.uri, {});
     }
 
     /**

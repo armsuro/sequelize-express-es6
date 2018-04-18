@@ -4,10 +4,9 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import morgan from 'morgan';
 import helmet from 'helmet';
-import socket from './socket.js';
-
 import routes from './routes';
 import Constants from './config/constants';
+import busboy from 'connect-busboy';
 
 const app = express();
 
@@ -18,6 +17,7 @@ app.use(helmet());
 // Enable CORS with various options
 // https://github.com/expressjs/cors
 app.use(cors());
+app.use(busboy())
 
 // Request logger
 // https://github.com/expressjs/morgan
@@ -42,7 +42,5 @@ app.use('/public', express.static(`${__dirname}/public`));
 app.use(Constants.apiPrefix, routes);
 
 const server = app.listen(Constants.port);
-
-socket.attach(server);
 
 export default app;

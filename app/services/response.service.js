@@ -81,23 +81,6 @@ class ResponseService {
         };
     }
 
-
-    /**
-     * sendSlack function send error notification to slack
-     * @param {Object} data - Eroor object.
-     * @return {Object} data.
-     */
-    sendSlack(data) {
-        this.errorHendler();
-        if(!Object.keys(data).length) return;
-        request({
-            url: Constants.slack_url,
-            method: 'POST',
-            json: {
-                'text': JSON.stringify(new Error(data)),
-            },
-        });
-    }
     /**
      * Generate function creates and returns json for responses
      * @param {string} key - The key of status code.
@@ -115,25 +98,6 @@ class ResponseService {
             'message': (message) ? message : obj['message'],
             'data': returnData,
         };
-    }
-    /**
-     * errorHendler function createsjson for eceptions
-     */
-    errorHendler() {
-        if (!('toJSON' in Error.prototype))
-        Object.defineProperty(Error.prototype, 'toJSON', {
-            value: function() {
-                let alt = {};
-
-                Object.getOwnPropertyNames(this).forEach(function(key) {
-                    alt[key] = this[key];
-                }, this);
-
-                return alt;
-            },
-            configurable: true,
-            writable: true,
-        });
     }
 }
 

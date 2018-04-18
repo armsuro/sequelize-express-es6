@@ -19,13 +19,6 @@ const defaultConfig = {
   apiPrefix: '', // Could be /api/resource or /api/v2/resource
 
   /**
-   * Default constants
-   */
-  websocket_path: process.env.WEBSOCKET_PATH || '/socket.io',
-  default_cache_ttl: process.env.DEFAULT_CACHE_TTL || 10,
-  slack_url: process.env.SLACK_URL || 'https://hooks.slack.com/services/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',
-
-  /**
    * Security configuation options regarding sessions, authentication and hashing
    */
   security: {
@@ -38,19 +31,19 @@ const defaultConfig = {
 // Environment specific overrides
 const environmentConfigs = {
   development: {
-    mysql: {
-      uri: process.env.MYSQL_URI || 'mysql://root:123456@localhost/live_video_streaming',
+    postgres: {
+      uri: process.env.postgres_URI || 'postgres://postgres:123456@localhost/varduk',
     },
   },
   test: {
     port: 5678,
-    mysql: {
-      uri: process.env.MYSQL_URI || 'MYSQL://root:127.0.0.1/live_video_streaming',
+    postgres: {
+      uri: process.env.postgres_URI || 'postgres://postgres:123456@localhost/varduk',
     },
   },
   production: {
-    mysql: {
-       uri: process.env.MYSQL_URI || 'MYSQL://root:127.0.0.1/live_video_streaming',
+    postgres: {
+       uri: process.env.postgres_URI || 'postgres://postgres:123456@localhost/varduk',
     },
   },
 };

@@ -8,7 +8,9 @@
     "start": "nodemon",
     "test": "NODE_ENV=test mocha --recursive --reporter spec --compilers js:babel-register tests",
     "lint": "eslint app",
-    "doc": "jsdoc -r ./app"
+    "doc": "jsdoc -r ./app",
+    "migrate": "./node_modules/.bin/sequelize db:migrate",
+    "unmigrate": "./node_modules/.bin/sequelize db:migrate:undo"
   },
   "engines": {
     "node": ">= 6",
@@ -27,7 +29,10 @@
     "babel-core": "^6.18.0",
     "bcrypt": "^1.0.0",
     "body-parser": "^1.15.2",
+    "busboy": "^0.2.14",
+    "connect-busboy": "0.0.2",
     "cors": "^2.8.1",
+    "crypto": "^1.0.1",
     "dotenv": "^4.0.0",
     "esdoc": "^1.0.4",
     "esdoc-standard-plugin": "^1.0.0",

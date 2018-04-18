@@ -1,0 +1,5 @@
+var Constants = require('./app/config/constants');
+
+module.exports = {
+  'config': Constants.postgres
+}

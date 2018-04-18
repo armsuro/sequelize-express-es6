@@ -1,7 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
-    const sportTemplate = sequelize.define('sports_templates', {
-        sport_id: DataTypes.INTEGER,
-        data: DataTypes.JSON,
+    const file = sequelize.define('file', {
+        file: DataTypes.TEXT,
+        changed: DataTypes.BOOLEAN,
     }, {
         timestamps: false,
         classMethods: {
@@ -10,5 +10,5 @@ module.exports = (sequelize, DataTypes) => {
             },
         },
     });
-    return sportTemplate;
+    return event;
 };
