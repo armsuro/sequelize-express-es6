@@ -7,7 +7,7 @@ import fileController from './controllers/file.controller';
 const routes = new Router();
 // File
 routes.post('/upload', fileController.upload);
-routes.post('/download', fileController.download);
+routes.get('/download/:code', fileController.download);
 
 routes.use(errorHandler);
 

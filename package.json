@@ -37,6 +37,7 @@
     "esdoc": "^1.0.4",
     "esdoc-standard-plugin": "^1.0.0",
     "express": "^4.16.3",
+    "formidable": "^1.2.1",
     "frameguard": "^3.0.0",
     "helmet": "^3.12.0",
     "jsonwebtoken": "^7.1.0",
@@ -46,11 +47,13 @@
     "morgan": "^1.7.0",
     "multer": "^1.2.0",
     "mysql": "^2.15.0",
-    "mysql2": "^1.5.2",
+    "mysql2": "^1.5.3",
+    "pg": "^6.4.1",
     "redis": "^2.8.0",
-    "sequelize": "^3.23.6",
-    "socket.io": "^2.0.4",
-    "socket.io-client": "^2.0.4"
+    "request": "^2.85.0",
+    "sequelize": "^3.32.1",
+    "socket.io": "^2.1.0",
+    "socket.io-client": "^2.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
@@ -68,6 +71,6 @@
     "isparta": "^4.0.0",
     "jsdoc": "^3.5.5",
     "mocha": "^3.1.2",
-    "nodemon": "^1.17.2"
+    "nodemon": "^1.17.3"
   }
 }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script type="text/javascript">
+			document.addEventListener("DOMContentLoaded", ()=>{
+				document.getElementById('ajax-upload').addEventListener("submit", (e)=>{
+					e.preventDefault()
+					const form = e.target,
+						data = new FormData(form),
+						request = new XMLHttpRequest();
+					request.responseType = 'json';
+					request.onreadystatechange = ()=>{
+						if(request.response)
+							document.getElementById("result").innerText = request.response.url
+					}
+			
+					request.open(form.method, form.action)
+					request.send(data)
+				})
+			})
+		</script>
+	</head>
+	<body>
+		<form id="ajax-upload" action="http://localhost:4567/upload" method="post" enctype="multipart/form-data">
+			File: <input type="file" name="submitted">
+			<input type="hidden" name="someParam" value="someValue"/>
+			<button type="submit">Upload your file</button>
+		</form>
+		<div>
+			Copy your download url
+			<div id="result"></div>
+		</div>
+	</body>
+</html>

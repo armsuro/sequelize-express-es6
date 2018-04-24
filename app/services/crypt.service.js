@@ -9,11 +9,10 @@ class Crypt {
         this.iv = iv;
     }
 
-    encryptAsync() {
-        const readStream = FileSystem.readFileSync(this.filePath);
+    encryptAsync(data) {
         const encipher = Crypto.createCipheriv('aes-256-cbc', this.password, this.iv);
         return Buffer.concat([
-            encipher.update(new Buffer(readStream)),
+            encipher.update(data),
             encipher.final()
         ]);
 

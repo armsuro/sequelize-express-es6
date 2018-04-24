@@ -1,5 +1,6 @@
 import path from 'path';
 import merge from 'lodash/merge';
+import config from '../../config/config';
 
 // Default configuations applied to all environments
 const defaultConfig = {
@@ -29,24 +30,7 @@ const defaultConfig = {
 };
 
 // Environment specific overrides
-const environmentConfigs = {
-  development: {
-    postgres: {
-      uri: process.env.postgres_URI || 'postgres://postgres:123456@localhost/varduk',
-    },
-  },
-  test: {
-    port: 5678,
-    postgres: {
-      uri: process.env.postgres_URI || 'postgres://postgres:123456@localhost/varduk',
-    },
-  },
-  production: {
-    postgres: {
-       uri: process.env.postgres_URI || 'postgres://postgres:123456@localhost/varduk',
-    },
-  },
-};
+const environmentConfigs = config;
 
 // Recursively merge configurations
 export default merge(defaultConfig, environmentConfigs[process.env.NODE_ENV] || {});

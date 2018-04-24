@@ -1,5 +1,5 @@
 import path from 'path';
-import fs from 'fs';
+import FS from 'fs';
 import Sequelize from 'sequelize';
 import Constants from './config/constants';
 
@@ -16,7 +16,7 @@ class Database {
      */
     constructor() {
         this.db = {};
-        this.sequelize = new Sequelize(Constants.postgres.uri, {});
+        this.sequelize = new Sequelize(Constants.url, {});
     }
 
     /**
@@ -24,7 +24,7 @@ class Database {
      * @return {json} db
     */
     create() {
-        fs
+        FS
             .readdirSync(`${__dirname}/models`)
             .forEach((file) => {
                 const model = this.sequelize.import(path.join(__dirname, '/models', file));
