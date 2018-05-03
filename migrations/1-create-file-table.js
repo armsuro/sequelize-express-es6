@@ -16,7 +16,7 @@ module.exports = {
                 },
                 status: {
                     type: Sequelize.BOOLEAN,
-                    defaultValue: false
+                    defaultValue: true
                 },
                 mimetype: {
                     type: Sequelize.STRING,
@@ -44,7 +44,7 @@ module.exports = {
                     type: Sequelize.DATE,
                     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
                 }
-            });
+            })
     },
 
     down: function(queryInterface, Sequelize) {

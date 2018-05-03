@@ -30,6 +30,8 @@ module.exports = {
                     type: Sequelize.DATE,
                     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
                 }
+            }).then(()=>{
+                return queryInterface.sequelize.query('CREATE TRIGGER file_change_log BEFORE UPDATE ON file FOR EACH ROW BEGIN SET NEW.status = false; INSERT INTO `change_log`(`file_id`) VALUES (NEW.id); END;');
             });
     },
 

@@ -1,11 +1,11 @@
 {
   "development": {
-    "url": "postgres://postgres:123456@localhost/varduk"
+    "url": "mysql://root:123456@localhost/varduk"
   },
   "test": {
-    "url": "postgres://postgres:123456@localhost/varduk"
+    "url": "mysql://root:123456@localhost/varduk"
   },
   "production": {
-    "url": "postgres://postgres:123456@localhost/varduk"
+    "url": "mysql://root:123456@localhost/varduk"
   }
 }
