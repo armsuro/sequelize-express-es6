@@ -3,10 +3,9 @@ import Crypto from 'crypto';
 
 class Crypt {
 
-    constructor(filePath, iv) {
-        this.filePath = filePath;
-        this.password = Crypto.createHash('sha256').update('SurenGasparyanPass').digest();
-        this.iv = iv;
+    constructor() {
+        this.password = Crypto.createHash('sha256').update('VarduhiVardanyanPass').digest();
+        this.iv = new Buffer('a2xhcgAAAAAAAAAA');
     }
 
     encryptAsync(data) {
@@ -27,4 +26,4 @@ class Crypt {
     }
 }
 
-export default Crypt;
+export default new Crypt();

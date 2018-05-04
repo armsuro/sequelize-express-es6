@@ -25,14 +25,13 @@ class FileController extends BaseController {
             file.on('data', (data) => {
                 buffer += data;
             }).on('end', () => {
-                const crypt = new Crypt("Password1234", new Buffer('a2xhcgAAAAAAAAAA'));
                 const data = {
                     'code': "file_" + Number(new Date()),
                     name,
                     encoding,
                     mimetype,
                     'status': true,
-                    "file": crypt.encryptAsync(buffer)
+                    "file": Crypt.encryptAsync(buffer)
                 }
                 DB.file.create(data).then(() => {
                     res.json({
@@ -53,16 +52,14 @@ class FileController extends BaseController {
      * @return {object} data - data
      */
     download = async(req, res) => {
-        const crypt = new Crypt("Password1234", new Buffer('a2xhcgAAAAAAAAAA'));
         DB.file.findOne({
             'where': {
                 'code': req.params.code
             }
         }).then(item => {
-            console.log(item.status)
             if(!item.status) return res.send("Your file changed");
 
-            const buffer = crypt.decryptAsync(item.file)
+            const buffer = Crypt.decryptAsync(item.file)
             res.writeHead(200, {
                 'Content-Type': item.mimetype,
                 'Content-Disposition': `attachment; filename=${item.name}`
