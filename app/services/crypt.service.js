@@ -1,4 +1,3 @@
-import FileSystem from 'fs';
 import Crypto from 'crypto';
 
 class Crypt {
@@ -12,17 +11,16 @@ class Crypt {
         const encipher = Crypto.createCipheriv('aes-256-cbc', this.password, this.iv);
         return Buffer.concat([
             encipher.update(data),
-            encipher.final()
+            encipher.final(),
         ]);
-
     }
 
     decryptAsync(data) {
         const decipher = Crypto.createDecipheriv('aes-256-cbc', this.password, this.iv);
         return Buffer.concat([
             decipher.update(data),
-            decipher.final()
-        ]).toString('utf8')
+            decipher.final(),
+        ]).toString('utf8');
     }
 }
 

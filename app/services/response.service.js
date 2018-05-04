@@ -1,6 +1,3 @@
-import request from 'request';
-import Constants from '../config/constants';
-
 /**
  * ResponseService class to send many types responses.
  * @class
@@ -91,7 +88,6 @@ class ResponseService {
     generate(key, data, message) {
         const obj = this.MESSAGE[key];
         const returnData = (data) ? data : {};
-        if (obj['header_status'] == 500) this.sendSlack(returnData);
         return {
             'status': obj['status'],
             'http_status': obj['header_status'],

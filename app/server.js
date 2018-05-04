@@ -17,7 +17,7 @@ app.use(helmet());
 // Enable CORS with various options
 // https://github.com/expressjs/cors
 app.use(cors());
-app.use(busboy())
+app.use(busboy());
 
 // Request logger
 // https://github.com/expressjs/morgan
@@ -41,6 +41,6 @@ app.use('/public', express.static(`${__dirname}/public`));
 // Mount API routes
 app.use(Constants.apiPrefix, routes);
 
-const server = app.listen(Constants.port);
+app.listen(Constants.port);
 
 export default app;
